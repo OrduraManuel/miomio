@@ -1,18 +1,14 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterView } from 'vue-router'
+import Headering from '@/components/Headering.vue'
+import Footer from '@/components/Footer.vue'
 </script>
 
 <template>
   <div id="layout">
-    <header>
-      <div class="wrapper">
-        <nav>
-          <RouterLink :to="{ name: 'event-list' }">Events</RouterLink> |
-          <RouterLink :to="{ name: 'about' }">About</RouterLink>
-        </nav>
-      </div>
-    </header>
+    <Headering />
     <RouterView />
+    <Footer />
   </div>
 </template>
 
