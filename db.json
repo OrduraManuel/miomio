@@ -33,22 +33,28 @@
   ],
   "users": [
     {
-      "id": 123,
-      "nickname": "welfare",
-      "surname": "Cat Adoption Day",
-      "name": "Find your new feline friend at this event.",
-      "location": "Meow Town",
-      "email": "welfare@test.it",
-      "state": 1
+      "id": 1,
+      "type": 0,
+      "name": "Adminame",
+      "surname": "Adminsurname",
+      "email": "admin@test.it",
+      "nickname": "Adminickname"
     },
     {
-      "id": 456,
-      "nickname": "animal",
-      "surname": "Cat Adoption Day",
-      "name": "Find your new feline friend at this event.",
-      "email": "animal@test.it",
-      "location": "Meow Town",
-      "state": 1
+      "id": 2,
+      "type": 1,
+      "name": "Sellername",
+      "surname": "Sellersurname",
+      "email": "seller@test.it",
+      "nickname": "Sellerickname"
+    },
+    {
+      "id": 3,
+      "type": 2,
+      "name": "Username",
+      "surname": "Usersurname",
+      "email": "user@test.it",
+      "nickname": "Usernickname"
     }
   ]
 }
