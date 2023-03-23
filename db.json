@@ -38,7 +38,8 @@
       "name": "Adminame",
       "surname": "Adminsurname",
       "email": "admin@test.it",
-      "nickname": "Adminickname"
+      "username": "Admin",
+      "password": "Admin"
     },
     {
       "id": 2,
@@ -46,7 +47,8 @@
       "name": "Sellername",
       "surname": "Sellersurname",
       "email": "seller@test.it",
-      "nickname": "Sellerickname"
+      "username": "Seller",
+      "password": "Seller"
     },
     {
       "id": 3,
@@ -54,7 +56,8 @@
       "name": "Username",
       "surname": "Usersurname",
       "email": "user@test.it",
-      "nickname": "Usernickname"
+      "username": "User",
+      "password": "User"
     }
   ]
 }
