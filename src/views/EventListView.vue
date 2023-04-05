@@ -18,7 +18,6 @@ const options = ref([
   { id: 1, text: 'tre', value: '3' },
   { id: 2, text: 'cinque', value: '5' }
 ])
-
 onMounted(() => {
   watchEffect(() => {
     events.value = null;
