@@ -2,7 +2,7 @@ import { defineStore } from 'pinia';
 
 import { fetchWrapper, router } from '@/helpers';
 
-const baseUrl = `${import.meta.env.VITE_AUTH_API_URL}/users`;
+const baseUrl = `${import.meta.env.VITE_AUTH_API_URL}`;
 
 export const useAuthStore = defineStore({
     id: 'auth',

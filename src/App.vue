@@ -10,12 +10,25 @@ const authStore = useAuthStore();
 
 <template>
   <div id="layout">
-    <Headering />
-    <RouterView />
-    <Footer />
+    <Headering class="headerContent" />
+
+      <div class="bodyContent">
+        <RouterView />
+      </div>
+
+    <Footer class="footerContent" />
   </div>
 </template>
 
 <style lang="scss">
 @import "./assets/scss/style.scss";
+.bodyContent{
+  height: 80vh!important;
+}
+.headerContent{
+  height: 10vh!important;
+}
+.footerContent{
+  height: 10vh!important;
+}
 </style>

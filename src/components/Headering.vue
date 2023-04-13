@@ -17,20 +17,23 @@
     <header>
         <div class="wrapper">
         <nav>
-            <RouterLink :to="{ name: 'event-list' }">Events</RouterLink> |
-            <RouterLink :to="{ name: 'about' }">About</RouterLink> |
-            <RouterLink v-if="authStore.user" :to="{ name: 'dashboard' }">Dashboard</RouterLink>
+            <RouterLink class="mx-2" :to="{ name: 'EventList' }">Events</RouterLink>
+            <RouterLink class="mx-2" :to="{ name: 'about' }">About</RouterLink>
+            <RouterLink class="mx-2" :to="{ name: 'Test' }">Test</RouterLink>
+            <RouterLink class="mx-2" v-if="authStore.user" :to="{ name: 'dashboard' }">Dashboard</RouterLink>
+            <routerLink class="mx-2" v-if="authStore.user" :to="{ name: 'EventCreate' }">Create Event</routerLink>
         </nav>
         <nav>
-            <RouterLink v-if="!authStore.user" :to="{ name: 'LoginView' }">Login</RouterLink> |
+            <RouterLink v-if="!authStore.user" :to="{ name: 'LoginView' }">Login |</RouterLink>
             <RouterLink v-if="!authStore.user" :to="{ name: 'register' }">Register</RouterLink>
-            <ul  v-if="authStore.user" style="display: flex">
-                <li>id: {{ authStore.user.id }}</li>
-                <li>name: {{ authStore.user.name }}</li>
-                <li>type: {{ authStore.user.type }}</li>
-                <li>email: {{ authStore.user.email }}</li>
+            <ul class="userDescr" v-if="authStore.user" style="display: flex">
+                <li class="mx-2"><b>id: </b>{{ authStore.user.id }}</li>
+                <li class="mx-2"><b>name: </b>{{ authStore.user.name }}</li>
+                <li class="mx-2"><b>type: </b>{{ authStore.user.type }}</li>
+                <li class="mx-2"><b>email: </b> {{ authStore.user.email }}</li>
+                <span v-if="authStore.user" class="btn btn-primary mx-2" style="font-size: 20px; background-color: purple" @click="logOut">LOGOUT</span>
             </ul>
-            <span v-if="authStore.user" class="btn btn-primary" style="font-size: 20px; color: purple" @click="logOut">LOGOUT</span>
+
         </nav>
         </div>
     </header>
@@ -43,5 +46,11 @@ header{
 .wrapper{
     display: flex;
     justify-content: space-around;
+}
+.userDescr{
+    list-style-type: none;
+    align-content: center;
+    align-items: center;
+    align-self: center;
 }
 </style>
