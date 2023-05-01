@@ -22,6 +22,8 @@
             <RouterLink class="mx-2" :to="{ name: 'Test' }">Test</RouterLink>
             <RouterLink class="mx-2" v-if="authStore.user" :to="{ name: 'dashboard' }">Dashboard</RouterLink>
             <routerLink class="mx-2" v-if="authStore.user" :to="{ name: 'EventCreate' }">Create Event</routerLink>
+            <routerLink class="mx-2" v-if="authStore.user" :to="{ name: 'ItemCreate' }">Item Event</routerLink>
+
         </nav>
         <nav>
             <RouterLink v-if="!authStore.user" :to="{ name: 'LoginView' }">Login |</RouterLink>

@@ -11,19 +11,19 @@ const props = defineProps({
 })
 const thisEvent = ref('')
 
-const store = useEventStore()
+const eventStore = useEventStore()
 
 function addItemAndClear(item) {
   if (item.lenght === 0) {
     return
   }
   // invokes function in the store:
-  store.addEvent(item)
+  eventStore.addEvent(item)
   thisEvent.value = ''
 }
 
 function deleteItem(event){
-  store.deleteEvent(event.id)
+  eventStore.deleteEvent(event.id)
   router.push({ name: 'EventList' })
 }
 </script>
@@ -42,7 +42,7 @@ function deleteItem(event){
         </div>
         <div class="modal-footer  d-flex justify-content-around">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-danger" data-bs-dismiss="modal" @click="deleteItem(thisEvent)">Elimina</button>
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal" @click=eventStore.delEvent(event.id)>Elimina</button>
           <button type="button" class="btn btn-primary">Save changes</button>
         </div>
       </div>

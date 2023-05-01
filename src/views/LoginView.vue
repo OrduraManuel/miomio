@@ -2,7 +2,11 @@
 import { Form, Field } from 'vee-validate';
 import * as Yup from 'yup';
 
+import { inject } from 'vue'
+
 import { useAuthStore } from '@/stores';
+
+const GStore = inject('GStore')
 
 const schema = Yup.object().shape({
     username: Yup.string().required('Username is required'),
@@ -13,18 +17,29 @@ function onSubmit(values, { setErrors }) {
     const authStore = useAuthStore();
     const { username, password } = values;
 
-    console.log(username, password, ' loginView')
+    GStore.flashMessage = 'Bentornato '+ username +'!'
+    setTimeout(() =>{
+            GStore.flashMessage = ''
+          }, 4000)
 
     return authStore.login(username, password)
-        .catch(error => setErrors({ apiError: error }));
+    .catch(error => {
+        GStore.flashMessage = 'Error: '+ error +'!'
+        setTimeout(() =>{
+            GStore.flashMessage = ''
+          }, 4000)
+          throw error
+          
+        })
+        //.catch(error => setErrors({ apiError: error }));
 }
 </script>
 
 <template>
     <div>
         <div class="alert alert-info">
-            Username: test<br />
-            Password: test
+            Username: Admin<br />
+            Password: Admin
         </div>
         <h2>Login</h2>
         <Form @submit="onSubmit" :validation-schema="schema" v-slot="{ errors, isSubmitting }">

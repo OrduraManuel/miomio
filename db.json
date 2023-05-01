@@ -1,37 +1,23 @@
 {
   "events": [
     {
-      "id": 123,
-      "category": "animal welfare",
-      "title": "Cat Adoption Day",
-      "description": "Find your new feline friend at this event.",
-      "location": "Meow Town",
-      "date": "January 28, 2022",
-      "time": "12:00",
-      "petsAllowed": true,
-      "organizer": "Kat Laydee"
-    },
-    {
       "id": 456,
       "category": "food",
-      "title": "Community Gardening",
+      "title": "Community 666 Gardening",
       "description": "Join us as we tend to the community edible plants.",
-      "location": "Flora City",
+      "location": "Flora City 777",
       "date": "March 14, 2022",
       "time": "10:00",
       "petsAllowed": true,
-      "organizer": "Fern Pollin"
-    },
-    {
-      "id": 789,
-      "category": "sustainability",
-      "title": "Beach Cleanup",
-      "description": "Help pick up trash along the shore.",
-      "location": "Playa Del Carmen",
-      "date": "July 22, 2022",
-      "time": "11:00",
-      "petsAllowed": false,
-      "organizer": "Carey Wales"
+      "item": [
+        {
+          "id": 666
+        }
+      ],
+      "organizer": {
+        "id": 1,
+        "username": "Admin"
+      }
     },
     {
       "id": 1001,
@@ -42,29 +28,200 @@
       "date": "August 28, 2022",
       "time": "12:00",
       "petsAllowed": true,
-      "organizer": "Dawg Dahd"
-    },
-    {
-      "id": 1002,
-      "category": "food",
-      "title": "Canned Food Drive",
-      "description": "Bring your canned food to donate to those in need.",
-      "location": "Tin City",
-      "date": "September 14, 2022",
-      "time": "3:00",
-      "petsAllowed": true,
-      "organizer": "Kahn Opiner"
+      "item": [
+        {
+          "id": 999
+        }
+      ],
+      "organizer": {
+        "id": 2,
+        "username": "Seller"
+      }
     },
     {
       "id": 1003,
       "category": "sustainability",
       "title": "Highway Cleanup",
       "description": "Help pick up trash along the highway.",
-      "location": "Highway 50",
+      "location": "Highway",
       "date": "July 22, 2022",
       "time": "11:00",
       "petsAllowed": false,
-      "organizer": "Brody Kill"
+      "organizer": {
+        "id": 1,
+        "username": "Admin"
+      }
+    },
+    {
+      "id": 1111,
+      "category": "education",
+      "title": "test di edit 666",
+      "description": "test",
+      "location": "la cambusa dei pirati",
+      "date": "test",
+      "time": "test",
+      "organizer": {
+        "id": 1,
+        "username": "Admin"
+      }
+    },
+    {
+      "id": 928,
+      "category": "animal welfare",
+      "title": "sono uno nuovo",
+      "description": "fatto mòmmmò",
+      "location": "uscita dell inferno",
+      "date": "mò",
+      "time": "mò ti dico",
+      "organizer": {
+        "id": 1,
+        "username": "Admin"
+      }
+    },
+    {
+      "id": 157,
+      "category": "nature",
+      "title": "asd",
+      "description": "asd",
+      "location": "asd",
+      "date": "asd",
+      "time": "asd",
+      "organizer": {
+        "id": 1,
+        "username": "Admin"
+      }
+    },
+    {
+      "id": 795,
+      "category": "nature",
+      "title": "test edit 123564",
+      "description": "test edit",
+      "location": "test edit 123456",
+      "date": "test edit",
+      "time": "test edit",
+      "organizer": {
+        "id": 1,
+        "username": "Admin"
+      }
+    },
+    {
+      "id": 823,
+      "category": "nature",
+      "title": "Ciao Davide",
+      "description": "567",
+      "location": "coding moth",
+      "date": "666",
+      "time": "999",
+      "organizer": {
+        "id": 2,
+        "username": "Seller"
+      }
+    },
+    {
+      "id": 203,
+      "category": "nature",
+      "title": "davide",
+      "description": "davide",
+      "location": "davide",
+      "date": "davide",
+      "time": "davide",
+      "organizer": {
+        "id": 1,
+        "username": "Admin"
+      }
+    },
+    {
+      "id": 17,
+      "category": "nature",
+      "title": "test con item",
+      "description": "item con test",
+      "location": "heaven",
+      "date": "mo",
+      "time": "momo",
+      "organizer": {
+        "id": 1,
+        "username": "Admin"
+      }
+    },
+    {
+      "id": 884,
+      "category": "education",
+      "title": "66666",
+      "description": "666666",
+      "location": "6666",
+      "date": "6666",
+      "time": "66666",
+      "organizer": {
+        "id": 1,
+        "username": "Admin"
+      }
+    },
+    {
+      "id": 804,
+      "category": "animal welfare",
+      "title": "666",
+      "description": "66666",
+      "location": "666666",
+      "date": "666666",
+      "time": "66666",
+      "organizer": {
+        "id": 1,
+        "username": "Admin"
+      }
+    },
+    {
+      "id": 558,
+      "category": "education",
+      "title": "qweqwe",
+      "description": "qweqwe",
+      "location": "qweqweq",
+      "date": "ewqweqwe",
+      "time": "qweqweq",
+      "organizer": {
+        "id": 1,
+        "username": "Admin"
+      }
+    }
+  ],
+  "items": [
+    {
+      "id": 999,
+      "category": "food",
+      "title": "item: Community 666 Gardening",
+      "event": {
+        "id": 123,
+        "name": "test"
+      },
+      "organizer": {
+        "id": 2,
+        "username": "Seller"
+      }
+    },
+    {
+      "id": 666,
+      "category": "food",
+      "title": "item: Mortacci de pippo Gardening",
+      "event": {
+        "id": 456,
+        "name": "test"
+      },
+      "organizer": {
+        "id": 1,
+        "username": "Admin"
+      }
+    },
+    {
+      "id": 777,
+      "category": "food",
+      "title": "item: Mortacci de pippo Gardening",
+      "event": {
+        "id": 795,
+        "name": "test"
+      },
+      "organizer": {
+        "id": 1,
+        "username": "Admin"
+      }
     }
   ],
   "users": [

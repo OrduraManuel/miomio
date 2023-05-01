@@ -3,6 +3,14 @@ import { ref, onMounted } from 'vue'
 import EventService from '@/services/EventService.js'
 import { router } from '@/router'
 
+import { useAuthStore } from '@/stores';
+import { storeToRefs } from 'pinia';
+
+const authStore = useAuthStore();
+const { user: authUser } = storeToRefs(authStore);
+
+
+
 const props = defineProps({
   id: {
     required: true,
@@ -36,7 +44,7 @@ onMounted(() => {
     <div id="nav">
       <router-link :to="{ name: 'EventDetails'}">Details</router-link>
       <router-link :to="{ name: 'EventRegister' }">Register</router-link>
-      <router-link :to="{ name: 'EventEdit' }">Edit</router-link>
+      <router-link :to="{ name: 'EventEdit' }" v-if="event.organizer.id == authUser.id">Edit</router-link>
     </div>
     <router-view :event="event" />
   </div>

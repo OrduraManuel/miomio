@@ -1,27 +1,26 @@
 <script setup>
-import { ref, onMounted } from 'vue'
-import { router } from '@/router'
+import { ref } from 'vue'
+
+import iModal from '@/components/item/iModal.vue'
 
 import { useItemStore } from '@/stores'
-import { useEventStore } from '@/stores'
-
+import { router } from '@/router'
 
 import { v4 as uuidv4 } from 'uuid'
 import { storeToRefs } from 'pinia';
-
 import { useAuthStore } from '@/stores'
 
 const authStore = useAuthStore();
 const { user: authUser } = storeToRefs(authStore);
 
 const itemStore = useItemStore()
-
-const eventStore = useEventStore()
 const idRandom = getRandomArbitrary(1, 999)
 
 function getRandomArbitrary(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
 }
+
+const event = ref()
 
 const categories = [
         'sustainability',
@@ -33,7 +32,9 @@ const categories = [
         'community'
       ]
 
-const event = ref({
+let yourPick = ref()
+
+const item = ref({
         id: idRandom,
         organizer: {
           id: authStore.user.id,
@@ -45,30 +46,18 @@ const event = ref({
         location: '',
         date: '',
         time: '',
-        items: ''
+        event: ''
       })
-
-const { items: items } = storeToRefs(itemStore);
-
-onMounted(() => {
-    itemStore.fetchAllitems()
-    .then(() => {
-      console.log('questi sono items:',items.value)
-    })
-    .catch(error => {
-          console.log(error)
-
-        })
-})
-
-    function eSubmit(){
-      eventStore.createEvent(event.value)
+      function pickEvents({pickEvent}){
+        yourPick = pickEvent
+        console.log('ricevuto:', {yourPick})
+      }
+    function iSubmit(){
+      itemStore.createItem(item.value)
       .then(() => {
-          console.log('event in eCreate',event.value)
-          router.push({ name: 'EventList'})
+          router.push({ name: 'ItemList'})
         })
         .catch(error => {
-          console.log('event dentro ecreate SUBMIT',event.value)
           router.push({
             name: '404Resource',
             params: { resource: error }
@@ -77,64 +66,56 @@ onMounted(() => {
     }
 </script>
 
-
-
-
 <template>
-  <h1>Create an event</h1>
+  <h1>Create an item</h1>
 
   <div class="form-container">
-    <form @submit.prevent="eSubmit">
+    <form @submit.prevent="iSubmit">
       <label>Select a category: </label>
-      <select v-model="event.category">
+      <select v-model="item.category">
         <option
           v-for="option in categories"
           :value="option"
           :key="option"
-          :selected="option === event.category"
+          :selected="option === item.category"
         >
           {{ option }}
         </option>
       </select>
 
-      <h3>Name & describe your event</h3>
+      <h3>Name & describe your item</h3>
 
       <label>Title</label>
-      <input v-model="event.title" type="text" placeholder="Title" />
+      <input v-model="item.title" type="text" placeholder="Title" />
 
       <label>Description</label>
       <input
-        v-model="event.description"
+        v-model="item.description"
         type="text"
         placeholder="Description"
       />
 
-      <h3>Where is your event?</h3>
+      <h3>Where is your item?</h3>
 
       <label>Location</label>
-      <input v-model="event.location" type="text" placeholder="Location" />
+      <input v-model="item.location" type="text" placeholder="Location" />
 
-      <h3>When is your event?</h3>
+      <h3>When is your item?</h3>
       <label>Date</label>
-      <input v-model="event.date" type="text" placeholder="Date" />
+      <input v-model="item.date" type="text" placeholder="Date" />
 
       <label>Time</label>
-      <input v-model="event.time" type="text" placeholder="Time" />
+      <input v-model="item.time" type="text" placeholder="Time" />
 
+      <h3>Pick your event</h3>
 
-      <label>Select a category: </label>
-      <select v-model="items">
-        <option
-          v-for="option in items"
-          :value="option"
-          :key="option"
-          :selected="option === event.items.id"
-        >
-          {{ option.id }}
-        </option>
-      </select>
-
+        <label>event list </label> - <span>{{ pickEvents }} | {{ pickEvents.id }}</span>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            See all events 
+        </button>
+<br/><br/><br/>
       <button type="submit">Submit</button>
     </form>
   </div>
+  <iModal @burp="pickEvents"/>
 </template>

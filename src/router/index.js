@@ -9,6 +9,8 @@ import EventRegister from '../views/event/eRegister.vue'
 import EventEdit from '../views/event/eEdit.vue'
 import EventCreate from '../views/event/eCreate.vue'
 
+import ItemCreate from '../views/item/iCreate.vue'
+
 import Test from '../views/Testissimo.vue'
 
 import AboutView from '../views/AboutView.vue'
@@ -93,6 +95,11 @@ export const router = createRouter({
             path: '/Create',
             name: 'EventCreate',
             component: EventCreate,
+          },
+          {
+            path: '/itemCreate',
+            name: 'ItemCreate',
+            component: ItemCreate,
           },
           {
             path: '/:catchAll(.*)',
