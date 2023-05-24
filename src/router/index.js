@@ -2,13 +2,18 @@ import { createRouter, createWebHistory } from 'vue-router';
 
 import { useAuthStore } from '@/stores';
 
-import EventList from '../views/EventList.vue'
-import EventLayout from '../views/event/eLayout.vue'
-import EventDetails from '../views/event/eDetails.vue'
-import EventRegister from '../views/event/eRegister.vue'
-import EventEdit from '../views/event/eEdit.vue'
-import EventCreate from '../views/event/eCreate.vue'
+import LottoList from '../views/LottoList.vue'
+import LottoLayout from '../views/lotto/lLayout.vue'
+import LottoDetails from '../views/lotto/lDetails.vue'
+import LottoRegister from '../views/lotto/lRegister.vue'
+import LottoEdit from '../views/lotto/lEdit.vue'
+import LottoCreate from '../views/lotto/lCreate.vue'
 
+import ItemList from '../views/ItemList.vue'
+import ItemLayout from '../views/item/iLayout.vue'
+import ItemDetails from '../views/item/iDetails.vue'
+import ItemRegister from '../views/item/iRegister.vue'
+import ItemEdit from '../views/item/iEdit.vue'
 import ItemCreate from '../views/item/iCreate.vue'
 
 import Test from '../views/Testissimo.vue'
@@ -29,37 +34,37 @@ export const router = createRouter({
     routes: [
         {
             path: '/',
-            name: 'EventList',
-            component: EventList,
+            name: 'LottoList',
+            component: LottoList,
             props: route => ({ page: parseInt(route.query.page) || 1 })
           },
           {
-            path: '/events/:id',
-            name: 'EventLayout',
+            path: '/lottos/:id',
+            name: 'LottoLayout',
             props: true,
-            component: EventLayout,
+            component: LottoLayout,
             children:[
               {
                 path: '',
-                name: 'EventDetails',
-                component: EventDetails,
+                name: 'LottoDetails',
+                component: LottoDetails,
               },
               {
                 path: 'register',
-                name: 'EventRegister',
-                component: EventRegister,
+                name: 'LottoRegister',
+                component: LottoRegister,
               },
               {
                 path: 'edit',
-                name: 'EventEdit',
-                component: EventEdit,
+                name: 'LottoEdit',
+                component: LottoEdit,
               }
             ] 
           },
           {
-            path: '/event/:afterEvent(.*)',
+            path: '/lotto/:afterEvent(.*)',
             redirect: to =>{
-              return{ path: '/events/' + to.params.afterEvent }}
+              return{ path: '/lottos/' + to.params.afterEvent }}
           },
           {
             path: '/about',
@@ -93,13 +98,42 @@ export const router = createRouter({
           },
           {
             path: '/Create',
-            name: 'EventCreate',
-            component: EventCreate,
+            name: 'LottoCreate',
+            component: LottoCreate,
           },
           {
             path: '/itemCreate',
             name: 'ItemCreate',
             component: ItemCreate,
+          },
+           {
+            path: '/itemList',
+            name: 'ItemList',
+            component: ItemList,
+            props: route => ({ page: parseInt(route.query.page) || 1 })
+          },
+          {
+            path: '/items/:id',
+            name: 'ItemLayout',
+            props: true,
+            component: ItemLayout,
+            children:[
+              {
+                path: '',
+                name: 'ItemDetails',
+                component: ItemDetails,
+              },
+              {
+                path: 'register',
+                name: 'ItemRegister',
+                component: ItemRegister,
+              },
+              {
+                path: 'edit',
+                name: 'ItemEdit',
+                component: ItemEdit,
+              }
+            ] 
           },
           {
             path: '/:catchAll(.*)',

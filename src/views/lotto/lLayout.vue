@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted } from 'vue'
-import EventService from '@/services/EventService.js'
+import LottoService from '@/services/LottoService.js'
 import { router } from '@/router'
 
 import { useAuthStore } from '@/stores';
@@ -17,18 +17,18 @@ const props = defineProps({
   },
 })
 
-const event = ref(null)
+const lotto = ref(null)
 
 onMounted(() => {
-  EventService.getEvent(props.id)
+  LottoService.getLotto(props.id)
     .then((response) => {
-      event.value = response.data
+      lotto.value = response.data
     })
     .catch((error) => {
         if(error.response && error.response.status == 404){
             router.push({
                 name: '404Resource',
-                params: { resource: 'event'}
+                params: { resource: 'lotto'}
             })
         } else {
             router.push({ name: 'NetworkError'})
@@ -38,15 +38,15 @@ onMounted(() => {
 </script>
 
 <template>
-  <div v-if="event" class="event" :class="id">
+  <div v-if="lotto" class="lotto" :class="id">
 
-    <h1 >{{ event.title }}</h1>
+    <h1 >{{ lotto.title }}</h1>
     <div id="nav">
-      <router-link :to="{ name: 'EventDetails'}">Details</router-link>
-      <router-link :to="{ name: 'EventRegister' }">Register</router-link>
-      <router-link :to="{ name: 'EventEdit' }" v-if="event.organizer.id == authUser.id">Edit</router-link>
+      <router-link :to="{ name: 'LottoDetails'}">Details</router-link>
+      <router-link :to="{ name: 'LottoRegister' }">Register</router-link>
+      <router-link :to="{ name: 'LottoEdit' }" v-if="lotto.organizer.id == authUser.id">Edit</router-link>
     </div>
-    <router-view :event="event" />
+    <router-view :lotto="lotto" />
   </div>
 </template>
 

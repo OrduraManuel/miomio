@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, inject } from 'vue'
 
 import iModal from '@/components/item/iModal.vue'
 
@@ -9,6 +9,8 @@ import { router } from '@/router'
 import { v4 as uuidv4 } from 'uuid'
 import { storeToRefs } from 'pinia';
 import { useAuthStore } from '@/stores'
+
+const GStore = inject('GStore')
 
 const authStore = useAuthStore();
 const { user: authUser } = storeToRefs(authStore);
@@ -20,7 +22,7 @@ function getRandomArbitrary(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
 }
 
-const event = ref()
+const lotto = ref()
 
 const categories = [
         'sustainability',
@@ -46,15 +48,20 @@ const item = ref({
         location: '',
         date: '',
         time: '',
-        event: ''
+        lotto: ''
       })
-      function pickEvents({pickEvent}){
-        yourPick = pickEvent
+      function pickLottos({pickLotto}){
+        yourPick = pickLotto
         console.log('ricevuto:', {yourPick})
       }
     function iSubmit(){
       itemStore.createItem(item.value)
       .then(() => {
+        const GstoreMsg = item.value
+        GStore.flashMessage = 'L Item: '+ GstoreMsg.title + ' è stato creato!'
+          setTimeout(() =>{
+            GStore.flashMessage = ''
+          }, 4000)
           router.push({ name: 'ItemList'})
         })
         .catch(error => {
@@ -102,20 +109,20 @@ const item = ref({
 
       <h3>When is your item?</h3>
       <label>Date</label>
-      <input v-model="item.date" type="text" placeholder="Date" />
+      <input v-model="item.date" type="date" placeholder="Date" />
 
       <label>Time</label>
-      <input v-model="item.time" type="text" placeholder="Time" />
+      <input v-model="item.time" type="time" placeholder="Time" />
 
-      <h3>Pick your event</h3>
+      <h3>Pick your lotto</h3>
 
-        <label>event list </label> - <span>{{ pickEvents }} | {{ pickEvents.id }}</span>
+        <label>lotto list </label> - <span> {{ pickLottos.value }}</span>
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            See all events 
+            See all Lottos 
         </button>
 <br/><br/><br/>
       <button type="submit">Submit</button>
     </form>
   </div>
-  <iModal @burp="pickEvents"/>
+  <iModal @burp="pickLottos"/>
 </template>

@@ -1,14 +1,14 @@
 <script setup>
 import { ref, onMounted, watchEffect, defineProps } from 'vue'
-import EventCard from '@/components/event/EventCard.vue'
-import EventService from '@/services/EventService.js'
+import LottoCard from '@/components/lotto/LottoCard.vue'
+import LottoService from '@/services/LottoService.js'
 import { router } from '@/router'
 
-const events = ref([])
+const lottos = ref([])
 
 let selectedDefault = 2
 
-let totalEvents = ref(0)
+let totalLottos = ref(0)
 const selected = ref(props.perPage)
 
 const options = ref([
@@ -22,11 +22,11 @@ const props = defineProps(['perPage','page'])
 onMounted(() => {
   selected.value = selectedDefault
   watchEffect(() => {
-    events.value = null
-    EventService.getEvents( selected.value , props.page)
+    lottos.value = null
+    LottoService.getLottos( selected.value , props.page)
     .then((response) => {
-      events.value = response.data
-      totalEvents = response.headers['x-total-count']
+      lottos.value = response.data
+      totalLottos = response.headers['x-total-count']
     })
     .catch(() => {
       router.push({ name: 'networkError'})
@@ -35,22 +35,22 @@ onMounted(() => {
 })
 
 function hasNextPage() {
-  const totalPages = Math.ceil(totalEvents.value / selected.value)
+  const totalPages = Math.ceil(totalLottos.value / selected.value)
   return props.page < totalPages;
 }
 </script>
 
 <template>
-  <h1>Events For Good</h1>
-  <div class="events">
-    <EventCard 
-    v-for="event in events" 
-    :key="event.id" 
-    :event="event" />
+  <h1>lottos For Good</h1>
+  <div class="lottos">
+    <LottoCard 
+    v-for="lotto in lottos" 
+    :key="lotto.id" 
+    :lotto="lotto" />
   </div>
   <div class="pagination">
     <router-link 
-    :to="{name: 'EventList', query: {page: props.page - 1}}"
+    :to="{name: 'LottoList', query: {page: props.page - 1}}"
     rel="prev"
     v-if="page !=1">Prev</router-link>
 
@@ -62,10 +62,10 @@ function hasNextPage() {
           {{ option.text }}
       </option>
     </select>
-    <div>NumberPage: {{ props.page }} TotalEvents: {{ totalEvents }}</div>
+    <div>NumberPage: {{ props.page }} TotalLottos: {{ totalLottos }}</div>
 
     <router-link 
-      :to="{name: 'EventList', query: {page: props.page + 1}}"
+      :to="{name: 'LottoList', query: {page: props.page + 1}}"
       rel="next"
       v-if="hasNextPage">Next</router-link>
   </div>
@@ -73,7 +73,7 @@ function hasNextPage() {
 </template>
 
 <style scoped>
-.events {
+.lottos {
   display: flex;
   flex-direction: column;
   align-items: center;

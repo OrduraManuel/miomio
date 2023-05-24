@@ -37,32 +37,17 @@ export default {
       organizer: obj.organizer
     })
   },
-  postItem(items) { 
+  postItem(item) { 
     return apiClient.post('/items' ,{
-      id: items.id,
-      category: items.category,
-      title: items.title,
-      description: items.description,
-      location: items.location,
-      date: items.date,
-      time: items.time,
-      petsAllowed: items.petsAllowed,
-      organizer: items.organizer
+      id: item.id,
+      category: item.category,
+      title: item.title,
+      description: item.description,
+      location: item.location,
+      date: item.date,
+      time: item.time,
+      petsAllowed: item.petsAllowed,
+      organizer: item.organizer
     })
   }
 }
-
-/* ItemS SEZIONATO
-{
-      id: Item.id,
-      category: Item.category,
-      title: Item.title,
-      description: Item.description,
-      location: Item.location,
-      date: Item.date,
-      time: Item.time,
-      petsAllowed: Item.petsAllowed,
-      organizer: Item.organizer
-    }
-
-*/

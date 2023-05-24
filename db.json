@@ -1,5 +1,5 @@
 {
-  "events": [
+  "lottos": [
     {
       "id": 456,
       "category": "food",
@@ -22,17 +22,12 @@
     {
       "id": 1001,
       "category": "animal welfare",
-      "title": "Dog Adoption Day",
-      "description": "Find your new canine friend at this event.",
+      "title": "Dog Adoption 999 Day",
+      "description": "Find your new canine friend at this lotto.",
       "location": "Woof Town",
       "date": "August 28, 2022",
       "time": "12:00",
       "petsAllowed": true,
-      "item": [
-        {
-          "id": 999
-        }
-      ],
       "organizer": {
         "id": 2,
         "username": "Seller"
@@ -105,19 +100,6 @@
       }
     },
     {
-      "id": 823,
-      "category": "nature",
-      "title": "Ciao Davide",
-      "description": "567",
-      "location": "coding moth",
-      "date": "666",
-      "time": "999",
-      "organizer": {
-        "id": 2,
-        "username": "Seller"
-      }
-    },
-    {
       "id": 203,
       "category": "nature",
       "title": "davide",
@@ -138,6 +120,11 @@
       "location": "heaven",
       "date": "mo",
       "time": "momo",
+      "item": [
+        {
+          "id": 777
+        }
+      ],
       "organizer": {
         "id": 1,
         "username": "Admin"
@@ -187,8 +174,8 @@
     {
       "id": 999,
       "category": "food",
-      "title": "item: Community 666 Gardening",
-      "event": {
+      "title": "item: Community 999 Gardening",
+      "lotto": {
         "id": 123,
         "name": "test"
       },
@@ -200,11 +187,8 @@
     {
       "id": 666,
       "category": "food",
-      "title": "item: Mortacci de pippo Gardening",
-      "event": {
-        "id": 456,
-        "name": "test"
-      },
+      "title": "item: Mortac 66 Gardening",
+      "description": "werrrr",
       "organizer": {
         "id": 1,
         "username": "Admin"
@@ -213,11 +197,63 @@
     {
       "id": 777,
       "category": "food",
-      "title": "item: Mortacci de pippo Gardening",
-      "event": {
+      "title": "item: Mortacci de 777 Gardening",
+      "lotto": {
         "id": 795,
         "name": "test"
       },
+      "organizer": {
+        "id": 1,
+        "username": "Admin"
+      }
+    },
+    {
+      "id": 675,
+      "category": "nature",
+      "title": "test create666",
+      "description": "test create",
+      "location": "test create",
+      "date": "test create",
+      "time": "test create",
+      "organizer": {
+        "id": 1,
+        "username": "Admin"
+      }
+    },
+    {
+      "id": 277,
+      "category": "animal welfare",
+      "title": "aritest inject",
+      "description": "aritest inject",
+      "location": "aritest inject",
+      "date": "aritest inject",
+      "time": "aritest inject",
+      "organizer": {
+        "id": 1,
+        "username": "Admin"
+      }
+    },
+    {
+      "id": 382,
+      "category": "food",
+      "title": "ariritestissimo",
+      "description": "ariritestissimo",
+      "location": "ariritestissimo",
+      "date": "ariritestissimo",
+      "time": "ariritestissimo",
+      "organizer": {
+        "id": 1,
+        "username": "Admin"
+      }
+    },
+    {
+      "id": 575,
+      "category": "housing",
+      "title": "testValue",
+      "description": "testValue",
+      "location": "testValue",
+      "date": "testValue",
+      "time": "testValue",
       "organizer": {
         "id": 1,
         "username": "Admin"

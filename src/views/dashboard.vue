@@ -1,25 +1,29 @@
 <script setup>
-import { onMounted } from 'vue'
+import { onMounted, inject } from 'vue'
+
+import { router } from '@/router'
 
 // import ItemService from '../services/ItemService.js'
 
 import { useItemStore } from '@/stores';
-import { useEventStore } from '@/stores';
+import { useLottoStore } from '@/stores';
 import { useAuthStore } from '@/stores';
 import { storeToRefs } from 'pinia';
+
+const GStore = inject('GStore')
 
 const authStore = useAuthStore();
 const { user: authUser } = storeToRefs(authStore);
 
-const eventStore = useEventStore()
-const { events: events } = storeToRefs(eventStore);
+const lottoStore = useLottoStore()
+const { lottos: lottos } = storeToRefs(lottoStore);
 
 const itemStore = useItemStore()
 const { items: items } = storeToRefs(itemStore);
 
   onMounted(() => {
-    itemStore.fetchAllitems()
-    eventStore.fetchAllEvents()
+    itemStore.fetchAllItems()
+    lottoStore.fetchAllLottos()
     .then(() => {
       console.log('questi sono gli items:',items.value)
     })
@@ -28,12 +32,49 @@ const { items: items } = storeToRefs(itemStore);
 
         })
 })
+
+function lDel(el){
+  lottoStore.delLotto(el.id)
+    .then(() => {
+      const GStoreMsg = el.title 
+      GStore.flashMessage = 'Il Lotto: '+ GStoreMsg +' è stato eliminato!'
+            setTimeout(() =>{
+              GStore.flashMessage = ''
+            }, 4000)
+          router.push({ name: 'LottoList'})
+        })
+        .catch(error => {
+          console.log('lotto dentro edit SUBMIT',el.value)
+          router.push({
+            name: '404Resource',
+            params: { resource: error }
+          })
+        })    
+}
+function iDel(el){
+  itemStore.delItem(el.id)
+    .then(() => {
+      const GStoreMsg = el.title
+        GStore.flashMessage = 'L item: '+ GStoreMsg +' è stato eliminato!'
+            setTimeout(() =>{
+              GStore.flashMessage = ''
+            }, 4000)
+          router.push({ name: 'ItemList'})
+        })
+        .catch(error => {
+          router.push({
+            name: '404Resource',
+            params: { resource: error }
+          })
+        })    
+}
+
 </script>
 
 <template>
     <div class="dashboard">
       <h1>This is a dashboard di: {{ authUser.username }} | id: {{ authUser.id }} | Type: {{ authUser.type }} </h1>
-        <div class="EventRow">
+        <div class="LottoRow">
           <table class="table caption-top mx-5"  >
             <thead>
               <tr>
@@ -45,38 +86,57 @@ const { items: items } = storeToRefs(itemStore);
                 <th scope="col">Organizer</th>
               </tr>
             </thead>
-            <tbody v-for="event in events" :key="event.id" :event="event">
-              <tr v-if="event.organizer.id == authUser.id"> <!--v-if="event.organizer.id == authStore.user.id"-->
-                <th scope="row"  >{{ event.id }}</th>
-                <td >{{ event.category }}</td>
-                <td >{{ event.location }}</td>
-                <td>
-                  <div  v-for="item in items" :key="item.id" :item="item">
-                    <span v-if="item.event.id == event.id">
-                      {{ item.event.id }}
-                    </span>
-                  </div>
-                </td>
-                <td >{{ event.organizer.id }}</td>
-                <td >{{ event.organizer.username }}</td>
-                <!--<router-link :to="{name: EventEdit, query: {id: event.id}}" style="width: 110px; background-color: green; color: white;">Tasto EDIT</router-link>-->
+            <tbody v-for="lotto in lottos" :key="lotto.id" :lotto="lotto">
+              <tr v-if="lotto.organizer.id == authUser.id"> 
+                <th scope="row"  >{{ lotto.id }}</th>
+                <td >{{ lotto.category }}</td>
+                <td >{{ lotto.location }}</td>
+                <td>{{ lotto.item }}</td> 
+                <td >{{ lotto.organizer.id }}</td>
+                <td >{{ lotto.organizer.username }}</td>
                 <RouterLink
-                  class="event-link"
-                  :to="{ name: 'EventEdit', params: { id: event.id } }">Tasto edit</RouterLink>
-                <td id="delBtn" style="width: 110px; background-color: red; color: white;" @click=eventStore.delEvent(event.id)>Tasto elimina</td>
+                  class="lotto-link"
+                  :to="{ name: 'LottoEdit', params: { id: lotto.id } }">Tasto edit</RouterLink>
+                <td id="delBtn" style="width: 110px; background-color: red; color: white;" @click=lDel(lotto.value)>Tasto elimina</td>
               </tr>
 
             </tbody>
           </table>        
         </div>
+        <h1>This is a list of Items di: {{ authUser.username }} | id: {{ authUser.id }} | Type: {{ authUser.type }} </h1>
 
+        <div class="LottoRow">
+          <table class="table caption-top mx-5"  >
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Title</th>
+                <th scope="col">Organizer ID</th>
+                <th scope="col">Organizer</th>
+              </tr>
+            </thead>
+            <tbody v-for="item in items" :key="item.id" :item="item">
+              <tr v-if="item.organizer.id == authUser.id"> 
+                <th scope="row"  >{{ item.id }}</th>
+                <td >{{ item.title }}</td>
+                <td >{{ item.organizer.id }}</td>
+                <td >{{ item.organizer.username }}</td>
+                <RouterLink
+                  class="lotto-link"
+                  :to="{ name: 'ItemEdit', params: { id: item.id } }">Tasto edit</RouterLink>
+                <td id="delBtn" style="width: 110px; background-color: red; color: white;" @click=iDel(item)>Tasto elimina</td>
+              </tr>
+
+            </tbody>
+          </table>        
+        </div>
     </div>
 </template>
 <style scoped>
 .dashboard {
 
 }
-.EventRow{
+.LottoRow{
     display: flex;
     justify-content: space-around;
 }

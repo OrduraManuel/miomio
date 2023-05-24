@@ -1,28 +1,40 @@
 <script setup>
     import { RouterLink } from 'vue-router'
     import { useAuthStore } from '@/stores';
-
+    import {inject, computed} from 'vue';
+    
     import { storeToRefs } from 'pinia';
 
+    const GStore = inject('GStore')
+
     const authStore = useAuthStore();
+    const { user: authUser } = storeToRefs(authStore);
+
+    const user = computed(() => authStore.user);
+    const username = computed(() => user.value.username);
 
     const logOut = () => { 
+        const GStoreMsg = username.value
+        GStore.flashMessage = 'Ciao '+ GStoreMsg +' torna presto a trovarci!'
+            setTimeout(() =>{
+              GStore.flashMessage = ''
+            }, 4000)
         authStore.logout()
     }; 
 
-    const { user: authUser } = storeToRefs(authStore);
 
 </script>
 <template>
     <header>
         <div class="wrapper">
         <nav>
-            <RouterLink class="mx-2" :to="{ name: 'EventList' }">Events</RouterLink>
+            <RouterLink class="mx-2" :to="{ name: 'LottoList' }">Lottos</RouterLink>
+            <RouterLink class="mx-2" :to="{ name: 'ItemList' }">Items</RouterLink>
+
             <RouterLink class="mx-2" :to="{ name: 'about' }">About</RouterLink>
-            <RouterLink class="mx-2" :to="{ name: 'Test' }">Test</RouterLink>
             <RouterLink class="mx-2" v-if="authStore.user" :to="{ name: 'dashboard' }">Dashboard</RouterLink>
-            <routerLink class="mx-2" v-if="authStore.user" :to="{ name: 'EventCreate' }">Create Event</routerLink>
-            <routerLink class="mx-2" v-if="authStore.user" :to="{ name: 'ItemCreate' }">Item Event</routerLink>
+            <routerLink class="mx-2" v-if="authStore.user" :to="{ name: 'LottoCreate' }">+Lotto</routerLink>
+            <routerLink class="mx-2" v-if="authStore.user" :to="{ name: 'ItemCreate' }">+Item</routerLink>
 
         </nav>
         <nav>

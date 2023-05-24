@@ -2,7 +2,7 @@
     <footer>
         <div class="footer">
         <nav>
-            <RouterLink :to="{ name: 'EventList' }">Lotti</RouterLink> |
+            <RouterLink :to="{ name: 'LottoList' }">Lotti</RouterLink> |
             <RouterLink :to="{ name: 'about' }">About</RouterLink>
         </nav>
         </div>

@@ -2,7 +2,7 @@
 import { defineProps } from 'vue'
 
 const props = defineProps({
-  event: {
+  item: {
     required: true,
   },
 })
@@ -10,12 +10,12 @@ const props = defineProps({
 </script>
 
 <template>
-    <p class="eventRegister">I'm REGISTER page on {{ event.title }} @ {{ event.location }}</p>
-    <p>{{ event.description }}</p>
+    <p class="itemRegister">I'm REGISTER page on {{ item.title }} @ {{ item.location }}</p>
+    <p>{{ item.description }}</p>
 </template>
 
 <style scoped>
-.eventRegister{
+.itemRegister{
 
 }
 </style>

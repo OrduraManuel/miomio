@@ -1,22 +1,22 @@
 <script setup>
-import eModal from '@/components/event/eModal.vue'
+import lModal from '@/components/lotto/lModal.vue'
 import { ref, inject, defineProps } from 'vue'
-import { useEventStore } from '@/stores'
+import { useLottoStore } from '@/stores'
 import { router } from '@/router'
 
 const GStore = inject('GStore')
 
-const eventStore = useEventStore()
+const lottoStore = useLottoStore()
 
 const props = defineProps({
-  event: {
+  lotto: {
       required: true,
     },
 })
 
-const thisEvent = props.event
+const thisEvent = props.lotto
 
-const event = ref({
+const lotto = ref({
         id: thisEvent.id,
         category: thisEvent.category,
         title: thisEvent.title,
@@ -29,31 +29,35 @@ const event = ref({
             username: thisEvent.organizer.username
         }
       })
-console.log('event VALUE', thisEvent.value)
-function eEdit(){
-    eventStore.edEvent(thisEvent.id, thisEvent)
+function lEdit(){
+  lottoStore.edLotto(thisEvent.id, thisEvent)
     .then(() => {
-          GStore.flashMessage = 'L Event: '+ thisEvent.title + ' è stato modificato'
+          GStore.flashMessage = 'Il lotto: '+ thisEvent.title + ' è stato modificato'
           setTimeout(() =>{
             GStore.flashMessage = ''
           }, 4000)
-          router.push({ name: 'EventDetails', params: thisEvent.id })
+          router.push({ name: 'LottoDetails', params: thisEvent.id })
         })
         .catch(error => {
-          console.log('event dentro edit SUBMIT',thisEvent.value)
+          console.log('lotto dentro edit SUBMIT',thisEvent.value)
           router.push({
             name: '404Resource',
             params: { resource: error }
           })
         })
 }
-function eDel(){
-    eventStore.delEvent(thisEvent.id)
+function lDel(){
+  lottoStore.delLotto(thisEvent.id)
     .then(() => {
-          router.push({ name: 'EventList', query: {page: props.page - 1}})
+      const GStoreMsg = thisEvent.title
+        GStore.flashMessage = 'Il Lotto: '+ GStoreMsg +' è stato eliminato!'
+            setTimeout(() =>{
+              GStore.flashMessage = ''
+            }, 4000)
+          router.push({ name: 'LottoList', query: {page: props.page - 1}})
         })
         .catch(error => {
-          console.log('event dentro edit SUBMIT',thisEvent.value)
+          console.log('lotto dentro edit SUBMIT',thisEvent.value)
           router.push({
             name: '404Resource',
             params: { resource: error }
@@ -66,7 +70,7 @@ function eDel(){
     <div class="container-fluid">
         <div class="row">
             <div class="col-5 mx-auto my-5">
-                <form @submit.prevent="eEdit" class="card eventEdit">
+                <form @submit.prevent="lEdit" class="card lottoEdit">
                     <div class="card-header">
                         I'm EDIT page on <b>{{ thisEvent.title }}</b>
                     </div>
@@ -97,19 +101,19 @@ function eDel(){
                             Open modal
                         </button>
                         <button class="btn btn-warning" type="submit"> modifica dati</button>
-                        <div class="btn btn-danger" @click=eDel> Elimina</div>
+                        <div class="btn btn-danger" @click=lDel> Elimina</div>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 
-<eModal :event="event"/>
+<iModal :lotto="lotto"/>
     
 </template>
 
 <style scoped>
-.eventEdit{
+.lottoEdit{
 
 }
 </style>

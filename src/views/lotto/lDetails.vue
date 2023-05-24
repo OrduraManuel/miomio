@@ -2,7 +2,7 @@
 import { defineProps } from 'vue'
 
 const props = defineProps({
-  event: {
+  lotto: {
     required: true,
   },
 })
@@ -10,12 +10,12 @@ const props = defineProps({
 </script>
 
 <template>
-    <p class="eventDetails">{{ event.time }} on {{ event.date }} @ {{ event.location }}</p>
-    <p>{{ event.description }}</p>
+    <p class="lottoDetails">{{ lotto.time }} on {{ lotto.date }} @ {{ lotto.location }}</p>
+    <p>{{ lotto.description }}</p>
 </template>
 
 <style scoped>
-.eventDetails{
+.lottoDetails{
 
 }
 </style>

@@ -1,6 +1,6 @@
 <script setup>
 defineProps({
-  event: {
+  lotto: {
     type: Object,
     required: true,
   },
@@ -9,32 +9,32 @@ defineProps({
 
 <template>
   <RouterLink
-    class="event-link"
-    :to="{ name: 'EventDetails', params: { id: event.id } }"
+    class="lotto-link"
+    :to="{ name: 'LottoDetails', params: { id: lotto.id } }"
   >
-    <div class="event-card">
-      <h2>{{ event.title }}</h2>
-      <span>@{{ event.time }} on {{ event.date }}</span><br>
-      <span>{{ event.organizer }}</span><br>
-      <span>{{ event.items }}</span><br>
-      <h2>{{ event.id }}</h2>
+    <div class="lotto-card">
+      <h2>{{ lotto.title }}</h2>
+      <span>@{{ lotto.time }} on {{ lotto.date }}</span><br>
+      <span>{{ lotto.organizer }}</span><br>
+      <span>{{ lotto.items }}</span><br>
+      <h2>{{ lotto.id }}</h2>
     </div>
   </RouterLink>
 </template>
 
 <style scoped>
-.event-card {
+.lotto-card {
   padding: 20px;
   width: 250px;
   cursor: pointer;
   border: 1px solid #39495c;
   margin-bottom: 18px;
 }
-.event-card:hover {
+.lotto-card:hover {
   transform: scale(1.01);
   box-shadow: 0 3px 12px 0 rgba(0, 0, 0, 0.2);
 }
-.event-link {
+.lotto-link {
   color: #2c3e50;
   text-decoration: none;
 }
