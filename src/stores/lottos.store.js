@@ -11,74 +11,67 @@ export const useLottoStore = defineStore('lottoStore', {
     }
   },
   getters: {
-    numberOfLottos: (state) => { return state.lottos.length}
+    numberOfLottos: (state) => {
+      return state.lottos.length
+    }
   },
   actions: {
-    createLotto(lotto) {
-      return LottoService.postLotto(lotto)
-        .then((response) => {
-          lotto = response.data
-          this.lottos.push(lotto)
-          setTimeout(() =>{
-            GStore.flashMessage = ''
-          }, 4000)
-        })
-        .catch(error => {
-          GStore.flashMessage = 'Errore: '+ error
-          throw error
-        })
-    },
-    pushLotto(lotto) {
-      return LottoService.postLotto(lotto)
-      .then(function (response) {
+    async createLotto(lotto) {
+      try {
+        const response = await LottoService.postLotto(lotto)
         lotto = response.data
         this.lottos.push(lotto)
-      })
-      .catch(function (error){
+        setTimeout(() => {
+          GStore.flashMessage = ''
+        }, 4000)
+      } catch (error) {
+        GStore.flashMessage = 'Errore: ' + error
+        throw error
+      }
+    },
+    async pushLotto(lotto) {
+      try {
+        const response = await LottoService.postLotto(lotto)
+        lotto = response.data
+        this.lottos.push(lotto)
+      } catch (error) {
         console.log(error)
-      })
+      }
     },
-    fetchLotto(id) {
-      return LottoService.getLotto(id)
-        .then(response => {
-          this.lotto = response.data
-        })
-        .catch(error => {
-          throw error
-        })
+    async fetchLotto(id) {
+      try {
+        const response = await LottoService.getLotto(id)
+        this.lotto = response.data
+      } catch (error) {
+        throw error
+      }
     },
-    fetchAllLottos() {
-      return LottoService.getAllLottos()
-        .then(response => {
-          this.lottos = response.data
-          console.log(this.lottos)
-        })
-        .catch(error => {
-          throw error
-        })
+    async fetchAllLottos() {
+      try {
+        const response = await LottoService.getAllLottos()
+        this.lottos = response.data
+        console.log(this.lottos)
+      } catch (error) {
+        throw error
+      }
     },
-    delLotto(id) {
-      return LottoService.deleteLotto(id)
-        .then(response => {
-          let e = this.lottos.map(data => data.id).indexOf(id);
-          this.lottos.splice(e, 1)
-        })
-        .catch(error => {
-          throw error
-        })
+    async delLotto(id) {
+      try {
+        const response = await LottoService.deleteLotto(id)
+        let e = this.lottos.map(data => data.id).indexOf(id)
+        this.lottos.splice(e, 1)
+      } catch (error) {
+        throw error
+      }
     },
-    edLotto(id,obj) {
-      return LottoService.editLotto(id, obj)
-        .then(response => {
-          console.log('response',response)
-          console.log('dentro', obj,'oppelelà',id)
-          //do something
-
-        })
-        .catch(error => {
-          throw error
-        })
+    async edLotto(id,obj) {
+      try {
+        const response = await LottoService.editLotto(id, obj)
+        console.log('response', response)
+        console.log('dentro', obj, 'oppelelà', id)
+      } catch (error) {
+        throw error
+      }
     }
-    
   }
 })
